@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    input, button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Array Operations</h1>
+  <h2>42372 V Raghavendra Reddy</h2>
+  <p>Enter the array length and elements (comma-separated):</p>
+  <input type="text" id="arrayLength">
+  <input type="text" id="arrayElements">
+  <button onclick="createArray()">Create Array</button>
+
+  <div id="output"></div>
+
+  <script>
+    let myArray = [];
+
+    function createArray() {
+      const lengthInput = document.getElementById("arrayLength");
+      const elementsInput = document.getElementById("arrayElements");
+      const outputDiv = document.getElementById("output");
+
+      const length = parseInt(lengthInput.value);
+      const elements = elementsInput.value.split(",");
+
+      if (elements.length !== length) {
+        outputDiv.innerHTML = "Number of elements must match the specified length.";
+        return;
+      }
+
+      myArray = elements;
+      outputDiv.innerHTML = "Array created: " + myArray;
+
+      lengthInput.value = "";
+      elementsInput.value = "";
+    }
+
+    function removeByIndex() {
+      const index = parseInt(prompt("Enter index to remove:"));
+      if (index >= 0 && index < myArray.length) {
+        myArray.splice(index, 1);
+        document.getElementById("output").innerHTML = "Array after removal: " + myArray;
+      } else {
+        alert("Invalid index");
+      }
+    }
+
+    function removeByValue() {
+      const value = prompt("Enter value to remove:");
+      const index = myArray.indexOf(value);
+      if (index !== -1) {
+        myArray.splice(index, 1);
+        document.getElementById("output").innerHTML = "Array after removal: " + myArray;
+      } else {
+        alert("Value not found in the array");
+      }
+    }
+
+    function replaceByIndex() {
+      const index = parseInt(prompt("Enter index to replace:"));
+      if (index >= 0 && index < myArray.length) {
+        const value = prompt("Enter the new value:");
+        myArray[index] = value;
+        document.getElementById("output").innerHTML = "Array after replacement: " + myArray;
+      } else {
+        alert("Invalid index");
+      }
+    }
+
+    function replaceByValue() {
+      const oldValue = prompt("Enter value to replace:");
+      const index = myArray.indexOf(oldValue);
+      if (index !== -1) {
+        const newValue = prompt("Enter the new value:");
+        myArray[index] = newValue;
+        document.getElementById("output").innerHTML = "Array after replacement: " + myArray;
+      } else {
+        alert("Value not found in the array");
+      }
+    }
+
+    function appendElement() {
+      const value = prompt("Enter value to append:");
+      myArray.push(value);
+      document.getElementById("output").innerHTML = "Array after append: " + myArray;
+    }
+
+    function checkContainsValue() {
+      const value = prompt("Enter value to check:");
+      const contains = myArray.includes(value);
+      document.getElementById("output").innerHTML = "Array contains " + value + ": " + contains;
+    }
+
+    function emptyArray() {
+      myArray = [];
+      document.getElementById("output").innerHTML = "Array is now empty";
+    }
+  </script>
+
+  <p>Operations:</p>
+  <button onclick="removeByIndex()">Remove by Index</button>
+  <button onclick="removeByValue()">Remove by Value</button>
+  <button onclick="replaceByIndex()">Replace by Index</button>
+  <button onclick="replaceByValue()">Replace by Value</button>
+  <button onclick="appendElement()">Append Element</button>
+  <button onclick="checkContainsValue()">Check Contains Value</button>
+  <button onclick="emptyArray()">Empty Array</button>
+  </body>
+</html>
